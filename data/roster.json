@@ -1,0 +1,22 @@
+{
+  "classes": [
+    {
+      "class_id": "L3-SAT-0940",
+      "level": 3,
+      "day": "Saturday",
+      "time": "09:40",
+      "teacher_id": "T1",
+      "children": [
+        {"child_id": "C1", "name": "Ava M."},
+        {"child_id": "C2", "name": "Jack O."},
+        {"child_id": "C3", "name": "Saoirse K."},
+        {"child_id": "C4", "name": "Liam D."},
+        {"child_id": "C5", "name": "Emma R."},
+        {"child_id": "C6", "name": "Noah B."},
+        {"child_id": "C7", "name": "Aoife C."},
+        {"child_id": "C8", "name": "Cian F."}
+      ]
+    }
+  ]
+}
+
