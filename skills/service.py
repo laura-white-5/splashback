@@ -1,5 +1,5 @@
-# Skills Framework module
-"""
+""" Skills Framework module
+
 Responsibility: the skills at each level and each child's status for each skill.
 Prototype label: SIMPLIFIED - one level's skills and statuses loaded from a
 JSON data file. In the target design, statuses could be imported from a coach portal.

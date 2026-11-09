@@ -1,5 +1,5 @@
-# Identity & Access module
-"""
+""" Identity & Access module
+
 Responsibility: who the user is and what they are allowed to see.
 Prototype label: MOCKED - one hard-coded demo teacher, no login.
 The interface (can_view) is the same one the real login system would provide.

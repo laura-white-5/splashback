@@ -1,5 +1,5 @@
-# Lesson Notes module
-"""
+""" Lesson Notes module
+
 Responsibility: saving and retrieving a teacher's note for each child per lesson.
 Prototype label: BUILT - as designed, but using SQLite instead of PostgreSQL.
 This module owns the 'notes' table; no other module reads it directly.
@@ -18,7 +18,7 @@ class Note:
 
 
 class NotesService:
-    """Interface: save_note(child_id, lesson_id, text) -> Note"""
+    # Interface: save_note(child_id, lesson_id, text) -> Note
 
     def __init__(self, db_path="splashback.db"):
         self._db_path = db_path

@@ -1,5 +1,5 @@
-# Classes & Roster module
-"""
+""" Classes & Roster module
+
 Responsibility: schools, classes and the children in each class.
 Prototype label: SIMPLIFIED - one class loaded from a JSON data file
 instead of a database.
