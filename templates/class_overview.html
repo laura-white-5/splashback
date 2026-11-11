@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="button" href="{{ url_for('my_classes') }}">← Back</a>
+<h3>Level {{ swim_class.level }} · {{ swim_class.day }} {{ swim_class.time }}</h3>
+<p class="muted">✓ achieved · ~ in progress · ✗ not yet</p>
+<table>
+  <tr><th>Swimmer</th><th>Skills</th><th>Status</th><th></th></tr>
+  {% for r in rows %}
+  <tr>
+    <td>{{ r.child.name }}</td>
+    <td>{% for s in r.statuses %}{{ {'achieved': '✓', 'in_progress': '~', 'not_yet': '✗'}[s.status] }} {% endfor %}</td>
+    <td><span class="tag">{{ r.status }}</span></td>
+    <td>
+      {% if r.status in ['Draft ready', 'Approved'] %}
+        <a href="{{ url_for('review_report', class_id=swim_class.class_id, child_id=r.child.child_id) }}">Review</a>
+      {% else %}
+        <a href="{{ url_for('add_notes', class_id=swim_class.class_id, index=loop.index0) }}">Add note</a>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<br>
+<a href="{{ url_for('add_notes', class_id=swim_class.class_id, index=0) }}"><button>Add lesson notes</button></a>
+<form method="post" action="{{ url_for('generate', class_id=swim_class.class_id) }}" class="box">
+  <button type="submit"><b>Generate reports</b></button>
+  <p class="muted">Demo options:
+    <label><input type="checkbox" name="outage"> Simulate AI outage</label>
+    <label><input type="checkbox" name="mistake"> Simulate an AI mistake</label></p>
+</form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>My classes</h3>
+{% for c in classes %}
+  <div class="card">
+    <b>{{ c.day }} {{ c.time }} · Level {{ c.level }}</b> · {{ c.children|length }} swimmers
+    <a href="{{ url_for('class_overview', class_id=c.class_id) }}"><button>Open</button></a>
+  </div>
+{% endfor %}
+{% endblock %}
