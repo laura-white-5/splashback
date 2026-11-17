@@ -25,7 +25,7 @@ class SkillStatus:
 
 
 class SkillsService:
-    """Interface: get_statuses(child_id) -> list[SkillStatus]"""
+    # Interface: get_statuses(child_id) -> list[SkillStatus]
 
     def __init__(self, data_path=DEFAULT_DATA):
         with open(data_path, encoding="utf-8") as f:
@@ -37,7 +37,7 @@ class SkillsService:
         }
 
     def get_skills(self, level):
-        """Return the skills for a level, e.g. get_skills(3)."""
+        # Return the skills for a level, e.g. get_skills(3)
         return list(self._levels.get(str(level), []))
 
     def get_statuses(self, child_id):
