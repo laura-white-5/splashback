@@ -1,0 +1,111 @@
+
+:root {
+  --navy: #0b3d5c;
+  --blue: #0b6fa4;
+  --blue-dark: #095a85;
+  --aqua: #e6f4fa;
+  --aqua-border: #a9d4e8;
+  --text: #1d2b36;
+  --muted: #5b6b77;
+  --red: #b3261e;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 16px;
+  color: var(--text);
+  background: #f4fafd;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  color: #fff;
+  padding: 4px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+header h2 { margin: 12px 0; }
+header .muted { color: #d6ecf6; }
+
+h3 { color: var(--navy); }
+h4 { color: var(--blue); margin-bottom: 6px; }
+
+.card, .box {
+  background: #fff;
+  border: 1px solid var(--aqua-border);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.warn {
+  border: 2px dashed var(--red);
+  background: #fdecea;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.error { color: var(--red); font-weight: bold; }
+
+.tag {
+  background: var(--aqua);
+  border: 1px solid var(--aqua-border);
+  color: var(--navy);
+  border-radius: 12px;
+  padding: 2px 10px;
+  font-size: 13px;
+}
+
+table { border-collapse: collapse; width: 100%; background: #fff; }
+th { background: var(--aqua); color: var(--navy); }
+td, th { border: 1px solid var(--aqua-border); padding: 8px; text-align: left; }
+
+.row { display: flex; gap: 16px; }
+.row > div { flex: 1; }
+.muted { color: var(--muted); font-size: 14px; }
+
+a { color: var(--blue); }
+
+button, a.button {
+  display: inline-block;
+  padding: 7px 14px;
+  margin: 2px;
+  border: 1px solid var(--blue);
+  border-radius: 8px;
+  background: var(--blue);
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+}
+button:hover, a.button:hover { background: var(--blue-dark); }
+
+/* Back / Previous links: lighter "secondary" style */
+a.button { background: #fff; color: var(--blue); }
+a.button:hover { background: var(--aqua); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
+
+textarea {
+  border: 1px solid var(--aqua-border);
+  border-radius: 6px;
+  padding: 6px;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+/* Small, red "Remove" buttons on the review screen */
+button[value="remove"] {
+  background: #fff;
+  color: var(--red);
+  border-color: var(--red);
+  padding: 2px 8px;
+  font-size: 13px;
+}
+button[value="remove"]:hover { background: #fdecea; }
