@@ -3,8 +3,8 @@
 
 Prototype label: the real LLM is replaced by a predictable mock in
 Deliverable 2. It builds a draft directly from the skill statuses and note,
-so tests always get the same result. It can also simulate an outage, or add
-an unsupported claim, to test how the rest of the system reacts.
+so tests always get the same result. It can also simulate an outage or add
+an unsupported claim to test how the rest of the system reacts.
 """
 from ai_provider.base import AIProvider, AIServiceUnavailable, DraftItem, DraftReport
 

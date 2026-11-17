@@ -1,5 +1,4 @@
-# Rules any AI must follow
-"""AI Provider interface.
+""" AI Provider interface.
 
 Every AI provider (the mock now, a real LLM in Deliverable 3) must implement
 generate(context) -> DraftReport. The rest of the system only ever uses this
@@ -10,7 +9,7 @@ from dataclasses import dataclass, field
 
 
 class AIServiceUnavailable(Exception):
-    """Raised when the AI service cannot be reached or does not respond."""
+    """ Raised when the AI service cannot be reached or does not respond """
 
 
 @dataclass

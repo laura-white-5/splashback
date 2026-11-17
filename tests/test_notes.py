@@ -4,7 +4,7 @@ from notes.service import NotesService
 
 @pytest.fixture
 def notes(tmp_path):
-    # Each test gets its own fresh, temporary database file.
+    # Each test gets its own fresh, temporary database file
     return NotesService(db_path=tmp_path / "test.db")
 
 
