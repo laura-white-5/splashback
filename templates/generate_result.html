@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="button" href="{{ url_for('class_overview', class_id=swim_class.class_id) }}">← Class</a>
+<h3>Report generation · Level {{ swim_class.level }}</h3>
+{% if summary.ai_unavailable %}
+  <div class="warn">⚠ <b>The report service is unavailable right now.</b><br>
+    Your notes are saved, so nothing has been lost. Try generating again later.
+    ({{ summary.ai_unavailable|length }} report(s) not drafted)</div>
+{% endif %}
+<p>{{ summary.drafted|length }} draft(s) ready to review.</p>
+{% if summary.no_notes %}<p class="muted">{{ summary.no_notes|length }} swimmer(s) have no notes yet.</p>{% endif %}
+<a href="{{ url_for('class_overview', class_id=swim_class.class_id) }}"><button>Back to class</button></a>
+{% endblock %}

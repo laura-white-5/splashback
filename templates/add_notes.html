@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <a class="button" href="{{ url_for('class_overview', class_id=swim_class.class_id) }}">← Class</a>
+<h3>{{ child.name }} · Level {{ swim_class.level }} <span class="muted">(swimmer {{ index + 1 }} of {{ total }})</span></h3>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<div class="row">
+  <div class="box"><b>Skill statuses</b><br>
+    {% for s in statuses %}{{ {'achieved': '✓', 'in_progress': '~', 'not_yet': '✗'}[s.status] }} {{ s.name }}<br>{% endfor %}
+  </div>
+  <div class="box">
+    <form method="post">
+        <label for="note"><b>Your note</b></label><br>
+        <textarea id="note" name="note" rows="6" style="width: 100%">{{ note }}</textarea><br>
+            <div class="actions">
+        {% if index > 0 %}<a class="button" href="{{ url_for('add_notes', class_id=swim_class.class_id, index=index - 1) }}">← Previous</a>{% endif %}
+        <button name="action" value="next">Save &amp; next swimmer →</button>
+        <button name="action" value="done">Save &amp; back to class</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
