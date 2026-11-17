@@ -1,5 +1,22 @@
 {
   "classes": [
+        {
+      "class_id": "L2-SAT-0900",
+      "level": 2,
+      "day": "Saturday",
+      "time": "09:00",
+      "teacher_id": "T1",
+      "children": [
+        {"child_id": "C9", "name": "Ava W."},
+        {"child_id": "C10", "name": "Conor H."},
+        {"child_id": "C11", "name": "Gerry K."},
+        {"child_id": "C12", "name": "Oisín M."},
+        {"child_id": "C13", "name": "Robyn M."},
+        {"child_id": "C14", "name": "Tom G."},
+        {"child_id": "C15", "name": "Rachel O."},
+        {"child_id": "C16", "name": "Timmy K."}
+      ]
+    },
     {
       "class_id": "L3-SAT-0940",
       "level": 3,
@@ -15,6 +32,40 @@
         {"child_id": "C6", "name": "Darragh B."},
         {"child_id": "C7", "name": "Aoife C."},
         {"child_id": "C8", "name": "Cian F."}
+      ]
+    },
+    {
+      "class_id": "L4-SAT-1020",
+      "level": 4,
+      "day": "Saturday",
+      "time": "10:20",
+      "teacher_id": "T1",
+      "children": [
+        {"child_id": "C17", "name": "Anna D."},
+        {"child_id": "C18", "name": "Adam K."},
+        {"child_id": "C19", "name": "Niamh S."},
+        {"child_id": "C20", "name": "Rory B."},
+        {"child_id": "C21", "name": "Molly F."},
+        {"child_id": "C22", "name": "Conor R."},
+        {"child_id": "C23", "name": "Isabelle F."},
+        {"child_id": "C24", "name": "Cathal H."}
+      ]
+    },
+    {
+      "class_id": "L5-SAT-1100",
+      "level": 5,
+      "day": "Saturday",
+      "time": "11:00",
+      "teacher_id": "T1",
+      "children": [
+        {"child_id": "C25", "name": "Sophia M."},
+        {"child_id": "C26", "name": "Jamie L."},
+        {"child_id": "C27", "name": "Clodagh P."},
+        {"child_id": "C28", "name": "Ben H."},
+        {"child_id": "C29", "name": "Zoey A."},
+        {"child_id": "C30", "name": "Cillian D."},
+        {"child_id": "C31", "name": "Hannah K."},
+        {"child_id": "C32", "name": "Eoin T."}
       ]
     }
   ]

@@ -17,5 +17,6 @@ def test_unknown_class_raises_error():
 
 def test_teacher_sees_only_their_classes():
     roster = RosterService()
-    assert len(roster.get_classes_for_teacher("T1")) == 1
+    assert len(roster.get_classes_for_teacher("T1")) == 4
     assert roster.get_classes_for_teacher("SOMEONE-ELSE") == []
+

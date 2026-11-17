@@ -1,11 +1,32 @@
 {
   "levels": {
+    "2": [
+      {"skill_id": "L2-1", "name": "Blow bubbles with face in water"},
+      {"skill_id": "L2-2", "name": "Push and glide on front"},
+      {"skill_id": "L2-3", "name": "Kick on front in streamline position"},
+      {"skill_id": "L2-4", "name": "kick on back in streamline position"},
+      {"skill_id": "L2-5", "name": "Jump into deep water and kick to the side"}
+    ],
     "3": [
       {"skill_id": "L3-1", "name": "Kick on front in streamline position"},
       {"skill_id": "L3-2", "name": "Kick on back in streamline position"},
       {"skill_id": "L3-3", "name": "Front paddle"},
       {"skill_id": "L3-4", "name": "Pencil jump"},
       {"skill_id": "L3-5", "name": "Seated dive"}
+    ],
+    "4": [
+      {"skill_id": "L4-1", "name": "Front crawl 10m"},
+      {"skill_id": "L4-2", "name": "Back crawl 10m"},
+      {"skill_id": "L4-3", "name": "Breaststroke kick on front 5m"},
+      {"skill_id": "L4-4", "name": "Sculling on front"},
+      {"skill_id": "L4-5", "name": "Kneeling dive"}
+    ],
+    "5": [
+      {"skill_id": "L5-1", "name": "Front crawl 10m with breathing"},
+      {"skill_id": "L5-2", "name": "Back crawl 10m"},
+      {"skill_id": "L5-3", "name": "Breaststroke 10m"},
+      {"skill_id": "L5-4", "name": "Tread water for 30 seconds"},
+      {"skill_id": "L5-5", "name": "Standing dive"}
     ]
   },
   "statuses": {
@@ -16,6 +37,30 @@
     "C5": {"L3-1": "achieved", "L3-2": "in_progress", "L3-3": "achieved", "L3-4": "achieved", "L3-5": "in_progress"},
     "C6": {"L3-1": "in_progress", "L3-2": "not_yet", "L3-3": "not_yet", "L3-4": "in_progress", "L3-5": "not_yet"},
     "C7": {"L3-1": "achieved", "L3-2": "achieved", "L3-3": "in_progress", "L3-4": "achieved", "L3-5": "achieved"},
-    "C8": {"L3-1": "achieved", "L3-2": "in_progress", "L3-3": "in_progress", "L3-4": "in_progress", "L3-5": "not_yet"}
+    "C8": {"L3-1": "achieved", "L3-2": "in_progress", "L3-3": "in_progress", "L3-4": "in_progress", "L3-5": "not_yet"},
+    "C9": {"L2-1": "in_progress", "L2-2": "achieved", "L2-3": "not_yet", "L2-4": "achieved", "L2-5": "achieved"},
+    "C10": {"L2-1": "achieved", "L2-2": "in_progress", "L2-3": "achieved", "L2-4": "achieved", "L2-5": "achieved"},
+    "C11": {"L2-1": "achieved", "L2-2": "not_yet", "L2-3": "not_yet", "L2-4": "achieved", "L2-5": "achieved"},
+    "C12": {"L2-1": "achieved", "L2-2": "not_yet", "L2-3": "achieved", "L2-4": "achieved", "L2-5": "achieved"},
+    "C13": {"L2-1": "achieved", "L2-2": "not_yet", "L2-3": "achieved", "L2-4": "achieved", "L2-5": "achieved"},
+    "C14": {"L2-1": "achieved", "L2-2": "in_progress", "L2-3": "not_yet", "L2-4": "achieved", "L2-5": "achieved"},
+    "C15": {"L2-1": "in_progress", "L2-2": "achieved", "L2-3": "achieved", "L2-4": "achieved", "L2-5": "in_progress"},
+    "C16": {"L2-1": "achieved", "L2-2": "achieved", "L2-3": "achieved", "L2-4": "achieved", "L2-5": "not_yet"},
+    "C17": {"L4-1": "not_yet", "L4-2": "in_progress", "L4-3": "not_yet", "L4-4": "not_yet", "L4-5": "in_progress"},
+    "C18": {"L4-1": "in_progress", "L4-2": "achieved", "L4-3": "achieved", "L4-4": "achieved", "L4-5": "achieved"},
+    "C19": {"L4-1": "in_progress", "L4-2": "not_yet", "L4-3": "in_progress", "L4-4": "not_yet", "L4-5": "in_progress"},
+    "C20": {"L4-1": "achieved", "L4-2": "achieved", "L4-3": "not_yet", "L4-4": "achieved", "L4-5": "in_progress"},
+    "C21": {"L4-1": "achieved", "L4-2": "not_yet", "L4-3": "not_yet", "L4-4": "achieved", "L4-5": "achieved"},
+    "C22": {"L4-1": "in_progress", "L4-2": "in_progress", "L4-3": "in_progress", "L4-4": "not_yet", "L4-5": "not_yet"},
+    "C23": {"L4-1": "achieved", "L4-2": "achieved", "L4-3": "in_progress", "L4-4": "not_yet", "L4-5": "achieved"},
+    "C24": {"L4-1": "achieved", "L4-2": "in_progress", "L4-3": "not_yet", "L4-4": "in_progress", "L4-5": "not_yet"},
+    "C25": {"L5-1": "in_progress", "L5-2": "achieved", "L5-3": "not_yet", "L5-4": "in_progress", "L5-5": "achieved"},
+    "C26": {"L5-1": "achieved", "L5-2": "not_yet", "L5-3": "achieved", "L5-4": "achieved", "L5-5": "in_progress"},
+    "C27": {"L5-1": "achieved", "L5-2": "achieved", "L5-3": "not_yet", "L5-4": "not_yet", "L5-5": "not_yet"},
+    "C28": {"L5-1": "achieved", "L5-2": "achieved", "L5-3": "not_yet", "L5-4": "not_yet", "L5-5": "in_progress"},
+    "C29": {"L5-1": "achieved", "L5-2": "not_yet", "L5-3": "in_progress", "L5-4": "not_yet", "L5-5": "in_progress"},
+    "C30": {"L5-1": "not_yet", "L5-2": "achieved", "L5-3": "achieved", "L5-4": "achieved", "L5-5": "achieved"},
+    "C31": {"L5-1": "achieved", "L5-2": "achieved", "L5-3": "achieved", "L5-4": "achieved", "L5-5": "not_yet"},
+    "C32": {"L5-1": "achieved", "L5-2": "in_progress", "L5-3": "in_progress", "L5-4": "achieved", "L5-5": "achieved"}
   }
 }

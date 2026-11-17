@@ -48,4 +48,5 @@ class RosterService:
         return self._classes[class_id]
 
     def get_classes_for_teacher(self, teacher_id):
-        return [c for c in self._classes.values() if c.teacher_id == teacher_id]
+        classes = [c for c in self._classes.values() if c.teacher_id == teacher_id]
+        return sorted(classes, key=lambda c: c.time) # sorts classes by their start time
