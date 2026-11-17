@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="button"  href="{{ url_for('class_overview', class_id=class_id) }}">← Class</a>
+<h3>Review report: {{ child.name }} <span class="tag">AI-generated draft</span>
+  {% if report.status == 'approved' %}<span class="tag">Approved ✓</span>{% endif %}</h3>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+{% for w in report.warnings %}
+  <div class="warn">⚠ "{{ w.item_text }}": {{ w.reason }}. Remove or fix it before approving.</div>
+{% endfor %}
+<div class="row">
+  <div class="box"><b>AI draft</b>
+    {% for section, title in [('doing_well', 'Doing well'), ('working_on', 'Working on'), ('practise_next', 'Practise next')] %}
+      <h4>{{ title }}</h4>
+      {% for item in report.draft|attr(section) %}
+        <form method="post" style="margin: 0">
+          {{ item.text }} <span class="muted">[{{ 'from skills' if item.source == 'skill' else 'from note' }}]</span>
+          <input type="hidden" name="section" value="{{ section }}">
+          <input type="hidden" name="item" value="{{ loop.index0 }}">
+          <button name="action" value="remove">Remove</button>
+        </form>
+      {% endfor %}
+    {% endfor %}
+  </div>
+  <div class="box"><b>Your original note</b>
+    <p>"{{ note.text if note else '' }}"</p>
+    <b>Skill statuses</b><br>
+    {% for s in statuses %}{{ {'achieved': '✓', 'in_progress': '~', 'not_yet': '✗'}[s.status] }} {{ s.name }}<br>{% endfor %}
+  </div>
+</div>
+<form method="post"><button name="action" value="approve"><b>Approve</b></button></form>
+{% endblock %}

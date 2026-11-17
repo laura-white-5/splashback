@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="button"  href="{{ url_for('class_overview', class_id=class_id) }}">← Class</a> · <span class="muted">Parent view preview</span>
+<h3>{{ child.name }}'s progress · Level {{ level }}</h3>
+<div class="box">
+  {% for section, title in [('doing_well', 'Doing well'), ('working_on', 'Working on'), ('practise_next', 'Practise next')] %}
+    <h4>{{ title }}</h4>
+    {% for item in report.draft|attr(section) %}<p>{{ item.text }}</p>{% endfor %}
+  {% endfor %}
+  <hr><p class="muted">Drafted with AI, reviewed and approved by {{ teacher }} on {{ report.approved_at[:10] }}</p>
+</div>
+{% endblock %}
