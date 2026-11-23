@@ -34,7 +34,7 @@ def create_app(db_path="splashback.db"):
             ai = MockAIProvider(extra_claim="Just started inverted breaststroke")
         else:
             ai = get_ai_provider()
-        return ReportService(roster, skills, notes, review, ai)
+        return ReportService(roster, skills, notes, review, ai, retry_delay=2)
 
     def child_status(child_id):
         report = review.get_report(child_id, LESSON_ID)

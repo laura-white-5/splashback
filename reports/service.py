@@ -9,18 +9,19 @@ Uses other modules only through their interfaces.
 from ai_provider.base import AIServiceUnavailable
 from reports.check import check_draft
 from reports.context import build_context
-
+import time
 
 class ReportService:
     # Interface: request_reports(class_id, lesson_id) -> summary dict
 
-    def __init__(self, roster, skills, notes, review, ai_provider, retries=1):
+    def __init__(self, roster, skills, notes, review, ai_provider, retries=1, retry_delay=0):
         self._roster = roster
         self._skills = skills
         self._notes = notes
         self._review = review
         self._ai = ai_provider
         self._retries = retries
+        self._retry_delay = retry_delay
 
     def _generate_with_retry(self, context):
         for attempt in range(self._retries + 1):
@@ -29,6 +30,7 @@ class ReportService:
             except AIServiceUnavailable:
                 if attempt == self._retries:
                     raise
+                time.sleep(self._retry_delay)  # give a busy service a moment before retrying
         raise AIServiceUnavailable("AI unavailable after all retries")
 
     def request_reports(self, class_id, lesson_id):

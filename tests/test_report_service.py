@@ -59,3 +59,14 @@ def test_generating_again_does_not_overwrite_approved_report(setup):
     summary = service.request_reports(CLASS_ID, LESSON)   # teacher clicks Generate again
     assert summary["already_approved"] == ["C4"]
     assert review.get_report("C4", LESSON)["status"] == "approved"
+
+
+def test_garbled_ai_answer_does_not_crash_and_keeps_note(setup):
+    # Poor-quality AI output: the real provider gets text that is not valid JSON
+    from tests.test_gemini_provider import provider
+    notes, review, make_service = setup
+    notes.save_note("C4", LESSON, "bent knees when kick on back")
+    summary = make_service(provider("this is not json")).request_reports(CLASS_ID, LESSON)
+    assert summary["ai_unavailable"] == ["C4"]
+    assert review.get_report("C4", LESSON) is None
+    assert notes.get_note("C4", LESSON) is not None
