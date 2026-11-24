@@ -28,6 +28,10 @@ class DraftReport:
     def all_items(self):
         return self.doing_well + self.working_on + self.practise_next
 
+    def written_by_teacher(self):
+        # True if every line was written by the teacher (a manual report)
+        return all(item.source == "teacher" for item in self.all_items())
+
 
 class AIProvider(ABC):
     @abstractmethod

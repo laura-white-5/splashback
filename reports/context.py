@@ -26,3 +26,10 @@ def remove_name(text, full_name):
 def build_context(child, level, statuses, note_text):
     return ReportContext(level=level, statuses=statuses,
                          note_text=remove_name(note_text, child.name))
+
+def restore_name(draft, full_name):
+    # Put the child's first name back into the draft after the AI and the check have finished, so the parent's report reads naturally (the AI never saw the name)
+    first_name = full_name.split()[0]
+    for item in draft.all_items():
+        item.text = item.text.replace("The swimmer", first_name).replace("the swimmer", first_name)
+    return draft

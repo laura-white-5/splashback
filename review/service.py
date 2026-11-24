@@ -67,6 +67,24 @@ class ReviewService:
                  json.dumps([asdict(w) for w in warnings])),
             )
 
+    def create_manual_report(self, child_id, lesson_id, doing_well, working_on, practise_next):
+        """Save a report written by the teacher (used when the AI is unavailable)
+
+        Each argument is text with one line per point. Teacher-written lines are
+        not checked by the AI safety check and the report starts with no warnings
+        """
+        def lines(text):
+            return [DraftItem(line.strip(), None, "teacher")
+                    for line in text.splitlines() if line.strip()]
+
+        draft = DraftReport(lines(doing_well), lines(working_on), lines(practise_next))
+        if not draft.all_items():
+            raise ValueError("Write at least one line before saving")
+        existing = self.get_report(child_id, lesson_id)
+        if existing and existing["status"] == "approved":
+            raise ValueError("This report has already been approved")
+        self.submit_draft(child_id, lesson_id, draft, [])
+
     def get_report(self, child_id, lesson_id):
         with self._connect() as conn:
             row = conn.execute("SELECT * FROM reports WHERE child_id = ? AND lesson_id = ?",

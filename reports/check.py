@@ -39,6 +39,8 @@ def check_draft(draft, statuses, note_text):
 
     for item in draft.all_items():
         # Rule 2: a line about a skill must be about one of this child's skills
+        if item.source == "teacher":
+            continue  # the teacher wrote this line themselves, so it is not checked
         if item.skill_id and item.skill_id not in status_by_id:
             warnings.append(DraftWarning(item.text, "Mentions a skill not in this child's level"))
         # Rule 3: a line not about a skill must be supported by the teacher's note

@@ -3,6 +3,7 @@
 The routes only call each module's interface, all the logic lives in the modules.
 Run with:  python app.py   then open http://127.0.0.1:5000
 """
+import os
 from flask import Flask, redirect, render_template, request, url_for
 
 from access.service import AccessService
@@ -15,7 +16,7 @@ from roster.service import RosterService
 from skills.service import SkillsService
 
 LESSON_ID = "LESSON-1"   # Simplified: one lesson per class in the prototype
-
+MAX_AI_CALLS = 20   # cost limit: at most 20 AI requests each time reports are generated
 
 def create_app(db_path="splashback.db"):
     app = Flask(__name__)
@@ -34,7 +35,9 @@ def create_app(db_path="splashback.db"):
             ai = MockAIProvider(extra_claim="Just started inverted breaststroke")
         else:
             ai = get_ai_provider()
-        return ReportService(roster, skills, notes, review, ai, retry_delay=2)
+        return ReportService(roster, skills, notes, review, ai,
+                             retry_delay=float(os.getenv("SPLASHBACK_RETRY_DELAY", "2")),
+                             max_ai_calls=MAX_AI_CALLS)
 
     def child_status(child_id):
         report = review.get_report(child_id, LESSON_ID)
@@ -88,8 +91,29 @@ def create_app(db_path="splashback.db"):
         service = report_service(simulate_outage="outage" in request.form,
                                  simulate_mistake="mistake" in request.form)
         summary = service.request_reports(class_id, LESSON_ID)
-        return render_template("generate_result.html", swim_class=roster.get_class(class_id),
-                               summary=summary)
+        swim_class = roster.get_class(class_id)
+        unavailable = [c for c in swim_class.children if c.child_id in summary["ai_unavailable"]]
+        return render_template("generate_result.html", swim_class=swim_class, summary=summary,
+                               unavailable=unavailable)
+
+    # Screen 4b: Write a report manually (fallback when the AI is unavailable)
+    @app.route("/class/<class_id>/manual/<child_id>", methods=["GET", "POST"])
+    def manual_report(class_id, child_id):
+        user = access.current_user()
+        if not access.can_view(user["user_id"], child_id):
+            return "Not allowed", 403
+        error = None
+        if request.method == "POST":
+            try:
+                review.create_manual_report(child_id, LESSON_ID, request.form["doing_well"],
+                                            request.form["working_on"], request.form["practise_next"])
+                return redirect(url_for("review_report", class_id=class_id, child_id=child_id))
+            except ValueError as e:
+                error = str(e)
+        child = next(c for c in roster.get_class(class_id).children if c.child_id == child_id)
+        return render_template("manual_report.html", class_id=class_id, child=child,
+                               note=notes.get_note(child_id, LESSON_ID),
+                               statuses=skills.get_statuses(child_id), error=error)
 
     # Screen 5: Review report
     @app.route("/class/<class_id>/review/<child_id>", methods=["GET", "POST"])
@@ -141,4 +165,5 @@ def create_app(db_path="splashback.db"):
 
 
 if __name__ == "__main__":
-    create_app().run(debug=True)
+    # Debug mode only when FLASK_DEBUG=1 is set (e.g. in .env), never by default (risk N5)
+    create_app().run(debug=os.getenv("FLASK_DEBUG") == "1")

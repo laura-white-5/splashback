@@ -70,3 +70,26 @@ def test_garbled_ai_answer_does_not_crash_and_keeps_note(setup):
     assert summary["ai_unavailable"] == ["C4"]
     assert review.get_report("C4", LESSON) is None
     assert notes.get_note("C4", LESSON) is not None
+
+def test_drafts_use_the_childs_first_name(setup):
+    from ai_provider.base import DraftItem, DraftReport
+
+    class NamedAI(MockAIProvider):
+        def generate(self, context):
+            return DraftReport(doing_well=[DraftItem("The swimmer kicks well", "L3-1", "skill")])
+
+    notes, review, make_service = setup
+    notes.save_note("C4", LESSON, "good kick")
+    make_service(NamedAI()).request_reports(CLASS_ID, LESSON)
+    assert review.get_report("C4", LESSON)["draft"].doing_well[0].text == "Liam kicks well"
+
+
+def test_ai_request_limit_stops_extra_calls_and_keeps_notes(setup):
+    notes, review, make_service = setup
+    for child_id in ["C1", "C2", "C3"]:
+        notes.save_note(child_id, LESSON, "lovely streamline")
+    service = ReportService(RosterService(), SkillsService(), notes, review, MockAIProvider(), max_ai_calls=2)
+    summary = service.request_reports(CLASS_ID, LESSON)
+    assert summary["drafted"] == ["C1", "C2"]
+    assert summary["limit_reached"] == ["C3"]
+    assert notes.get_note("C3", LESSON) is not None

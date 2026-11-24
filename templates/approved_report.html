@@ -7,6 +7,6 @@
     <h4>{{ title }}</h4>
     {% for item in report.draft|attr(section) %}<p>{{ item.text }}</p>{% endfor %}
   {% endfor %}
-  <hr><p class="muted">Drafted with AI, reviewed and approved by {{ teacher }} on {{ report.approved_at[:10] }}</p>
+  <hr><p class="muted">{{ 'Written' if report.draft.written_by_teacher() else 'Drafted with AI, reviewed' }} and approved by {{ teacher }} on {{ report.approved_at[:10] }}</p>
 </div>
 {% endblock %}

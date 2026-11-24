@@ -5,8 +5,13 @@
 {% if summary.ai_unavailable %}
   <div class="warn">⚠ <b>The report service is unavailable right now.</b><br>
     Your notes are saved, so nothing has been lost. Try generating again later.
-    ({{ summary.ai_unavailable|length }} report(s) not drafted)</div>
+    ({{ summary.ai_unavailable|length }} report(s) not drafted)
+      <p>Or write these reports yourself now:</p>
+    {% for child in unavailable %}
+      <a class="button" href="{{ url_for('manual_report', class_id=swim_class.class_id, child_id=child.child_id) }}">Write manually: {{ child.name }}</a>
+    {% endfor %} </div>
 {% endif %}
+    {% if summary.limit_reached %}<div class="warn">⚠ The AI request limit for this run was reached, so {{ summary.limit_reached|length }} report(s) were not drafted. Their notes are saved: generate again later or write them manually.</div>{% endif %}
 <p>{{ summary.drafted|length }} draft(s) ready to review.</p>
 {% if summary.no_notes %}<p class="muted">{{ summary.no_notes|length }} swimmer(s) have no notes yet.</p>{% endif %}
 <a href="{{ url_for('class_overview', class_id=swim_class.class_id) }}"><button>Back to class</button></a>

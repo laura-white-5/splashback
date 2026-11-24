@@ -51,3 +51,23 @@ def test_editing_out_the_warning_allows_approval(review):
     review.update_draft(report_id, GOOD_DRAFT, warnings=[])  # teacher removed the bad line
     review.approve(report_id, "T1")
     assert review.is_shareable(report_id) is True
+
+def test_manual_report_is_saved_with_no_warnings(review):
+    review.create_manual_report("C4", "LESSON-1", "Great glide", "Straight legs on back kick\nConfidence in deep water", "")
+    report = review.get_report("C4", "LESSON-1")
+    assert report["warnings"] == []
+    assert len(report["draft"].working_on) == 2
+    assert report["draft"].written_by_teacher()
+
+
+def test_empty_manual_report_is_rejected(review):
+    with pytest.raises(ValueError):
+        review.create_manual_report("C4", "LESSON-1", "  ", "", "\n")
+
+
+def test_manual_report_cannot_replace_approved_report(review):
+    report_id = submit(review)
+    review.mark_opened(report_id)
+    review.approve(report_id, "T1")
+    with pytest.raises(ValueError):
+        review.create_manual_report("C4", "LESSON-1", "New text", "", "")

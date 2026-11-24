@@ -64,3 +64,15 @@ def test_instruction_like_note_cannot_override_check():
     draft = DraftReport(doing_well=[DraftItem("Passed front paddle", "L3-3", "skill")])
     warnings = check_draft(draft, liam_statuses(), note)
     assert any("not achieved" in w.reason for w in warnings)
+
+def test_teacher_written_lines_are_not_flagged():
+    draft = DraftReport(working_on=[DraftItem("Loves splashing with friends", None, "teacher")])
+    assert check_draft(draft, liam_statuses(), LIAM_NOTE) == []
+
+def test_name_is_restored_after_generation():
+    from reports.context import restore_name
+    draft = DraftReport(doing_well=[DraftItem("The swimmer has a great glide", "L3-1", "skill")],
+                        working_on=[DraftItem("Helping the swimmer feel calm in deep water", None, "note")])
+    restore_name(draft, "Liam D.")
+    assert draft.doing_well[0].text == "Liam has a great glide"
+    assert draft.working_on[0].text == "Helping Liam feel calm in deep water"

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="button" href="{{ url_for('class_overview', class_id=class_id) }}">← Class</a>
+<h3>Write report manually: {{ child.name }}</h3>
+<p class="muted">Use this when the AI is unavailable. Write one point per line.</p>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<div class="row">
+  <div class="box">
+    <form method="post">
+      <label for="doing_well"><b>Doing well</b></label>
+      <textarea id="doing_well" name="doing_well" rows="3" style="width: 100%"></textarea>
+      <label for="working_on"><b>Working on</b></label>
+      <textarea id="working_on" name="working_on" rows="3" style="width: 100%"></textarea>
+      <label for="practise_next"><b>Practise next</b></label>
+      <textarea id="practise_next" name="practise_next" rows="3" style="width: 100%"></textarea>
+      <div class="actions"><button type="submit">Save report</button></div>
+    </form>
+  </div>
+  <div class="box"><b>Your original note</b>
+    <p>"{{ note.text if note else '' }}"</p>
+    <b>Skill statuses</b><br>
+    {% for s in statuses %}{{ {'achieved': '✓', 'in_progress': '~', 'not_yet': '✗'}[s.status] }} {{ s.name }}<br>{% endfor %}
+  </div>
+</div>
+{% endblock %}

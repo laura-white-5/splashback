@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <a class="button"  href="{{ url_for('class_overview', class_id=class_id) }}">← Class</a>
-<h3>Review report: {{ child.name }} <span class="tag">AI-generated draft</span>
+<h3>Review report: {{ child.name }} <span class="tag">{{ 'Written by teacher' if report.draft.written_by_teacher() else 'AI-generated draft' }}</span>
   {% if report.status == 'approved' %}<span class="tag">Approved ✓</span>{% endif %}</h3>
 {% if error %}<p class="error">{{ error }}</p>{% endif %}
 {% for w in report.warnings %}
@@ -13,7 +13,7 @@
       <h4>{{ title }}</h4>
       {% for item in report.draft|attr(section) %}
         <form method="post" style="margin: 0">
-          {{ item.text }} <span class="muted">[{{ 'from skills' if item.source == 'skill' else 'from note' }}]</span>
+          {{ item.text }} <span class="muted">[{{ {'skill': 'from skills', 'note': 'from note', 'teacher': 'written by you'}[item.source] }}]</span>
           <input type="hidden" name="section" value="{{ section }}">
           <input type="hidden" name="item" value="{{ loop.index0 }}">
           <button name="action" value="remove">Remove</button>
