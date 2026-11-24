@@ -8,7 +8,10 @@ from dataclasses import dataclass
 
 STOPWORDS = {"the", "and", "with", "when", "his", "her", "their", "on", "in", "of",
              "to", "a", "is", "was", "just", "very", "good", "great", "teacher", "noted",
-             "swimmer", "working", "progress", "practise", "started"}
+             "swimmer", "working", "progress", "practise", "started",}
+
+MOVING_UP_PHRASES = ["move up", "moving up", "next level", "ready for level",
+                     "passed every", "every skill", "all skills", "all their skills"]
 
 
 @dataclass
@@ -31,6 +34,7 @@ def check_draft(draft, statuses, note_text):
     status_by_id = {s.skill_id: s.status for s in statuses}
     note_words = _keywords(note_text)
     warnings = []
+    all_achieved = all(s.status == "achieved" for s in statuses)
 
     # Rule 1: "Doing well" may only mention achieved skills
     for item in draft.doing_well:
@@ -41,6 +45,8 @@ def check_draft(draft, statuses, note_text):
         # Rule 2: a line about a skill must be about one of this child's skills
         if item.source == "teacher":
             continue  # the teacher wrote this line themselves, so it is not checked
+        if not all_achieved and any(p in item.text.lower() for p in MOVING_UP_PHRASES):
+            warnings.append(DraftWarning(item.text, "Says the child is moving up or passed every skill"))
         if item.skill_id and item.skill_id not in status_by_id:
             warnings.append(DraftWarning(item.text, "Mentions a skill not in this child's level"))
         # Rule 3: a line not about a skill must be supported by the teacher's note
