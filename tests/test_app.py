@@ -31,6 +31,7 @@ def test_ai_outage_shows_message_and_keeps_note(client):
     client.post(f"/class/{CLASS}/notes/3", data={"note": "bent knees", "action": "done"})
     page = client.post(f"/class/{CLASS}/generate", data={"outage": "on"}).data
     assert b"unavailable" in page
+    assert b"Write manually" in page
     assert b"bent knees" in client.get(f"/class/{CLASS}/notes/3").data
 
 
